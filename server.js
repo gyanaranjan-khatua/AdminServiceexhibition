@@ -14,14 +14,15 @@ dotenv.config();
 const app = express();
 
 app.use(
- cors({
+  cors({
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
-        "https://admin.serviceexhibition.com/",
-      "https://serviceexhibition.com/",
+      "https://admin.serviceexhibition.com",
+      "https://serviceexhibition.com",
+      "https://www.serviceexhibition.com",
     ],
-      methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
