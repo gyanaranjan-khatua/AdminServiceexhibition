@@ -18,7 +18,11 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
+        "https://admin.serviceexhibition.com/",
+      "https://serviceexhibition.com/",
     ],
+      methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
