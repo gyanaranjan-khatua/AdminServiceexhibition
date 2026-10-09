@@ -13,19 +13,28 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://admin.serviceexhibition.com",
-      "https://serviceexhibition.com",
-      "https://www.serviceexhibition.com",
-    ],
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://admin.serviceexhibition.com",
+  "https://serviceexhibition.com",
+  "https://www.serviceexhibition.com",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Origin not allowed by CORS: ${origin}`));
+  },
+  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
